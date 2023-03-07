@@ -1,6 +1,8 @@
 # Job Board App 
 ### CS 348
 
+The project currently has Feature 4 implemented which is displaying all of the jobs in our databse and being able to filter the jobs by parameters. 
+
 <details>
 <summary>How to run the project</summary>
 </details>
