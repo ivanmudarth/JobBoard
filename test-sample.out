@@ -1,0 +1,112 @@
+Execute:
+> SELECT * FROM USER
+
++ ------- + ------------- + ------------- + --------- + ---------- + ---------------- +
+| id      | username      | password      | name      | email      | description      |
++ ------- + ------------- + ------------- + --------- + ---------- + ---------------- +
+| 1       | user1         | abcabc        | John Doe  |            |                  |
+| NULL    | NULL          | NULL          | NULL      | NULL       | NULL             |
++ ------- + ------------- + ------------- + --------- + ---------- + ---------------- +
+2 rows
+
+
+Execute:
+> SELECT ID FROM User WHERE username = 'user1' AND password = 'abcabc'
+
++ ------- +
+| ID      |
++ ------- +
+| 1       |
++ ------- +
+1 rows
+
+
+Execute:
+> SELECT * FROM Shortlist
+
++ ------------ + ------------------- +
+| user_id      | job_posting_id      |
++ ------------ + ------------------- +
+| 1            | 2                   |
++ ------------ + ------------------- +
+1 rows
+
+
+Execute:
+> SELECT DISTINCT job_posting_id FROM Shortlist WHERE user_id = 1
+
++ ------------------- +
+| job_posting_id      |
++ ------------------- +
+| 2                   |
++ ------------------- +
+1 rows
+
+
++ ------------------- +
+1 rows
+
+
+Execute:
+> SELECT * FROM Reply
+
++ ------------------- + ------------ + --------------- + -------------- +
+| job_posting_id      | user_id      | reply_text      | timestamp      |
++ ------------------- + ------------ + --------------- + -------------- +
+| 2                   | 1            | this is my first reply | 2023-03-05 14:56:59 |
+| 2                   | 1            | this is my second reply | 2023-03-05 14:58:00 |
++ ------------------- + ------------ + --------------- + -------------- +
+2 rows
+
+
+Execute:
+> SELECT user_id, reply_text 
+FROM Reply 
+WHERE job_posting_id = 2 
+ORDER BY timestamp DESC
+
++ ------------ + --------------- +
+| user_id      | reply_text      |
++ ------------ + --------------- +
+| 1            | this is my second reply |
+| 1            | this is my first reply |
++ ------------ + --------------- +
+2 rows
+
+
+Execute:
+> SELECT * 
+FROM JobPosting 
+WHERE IF (True, UPPER(title) LIKE UPPER('%Sr%'), True) AND 
+	  IF (True, UPPER(city) = UPPER('new york') 
+		AND UPPER(state) = UPPER('ny'), True) AND
+	  IF (True, avg_salary BETWEEN 100 AND 200, True) AND 
+	  IF (True, rating >= 3.0, True)
+
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+| id      | title      | employer_id      | description      | min_salary      | max_salary      | avg_salary      | city      | state      | rating      |
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+| 1       | Sr Data Scientist | 1                |                  | 137             | 171             | 154             | New York  | NY         | 3.1         |
+| NULL    | NULL       | NULL             | NULL             | NULL            | NULL            | NULL            | NULL      | NULL       | NULL        |
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+2 rows
+
+
+Execute:
+> SELECT * 
+FROM JobPosting 
+WHERE IF (False, UPPER(title) LIKE UPPER('%%'), True) AND 
+	  IF (True, UPPER(city) = UPPER('New York') AND UPPER(state) = UPPER('NY'), True) AND
+	  IF (False, avg_salary BETWEEN 0 AND 0, True) AND
+	  IF (False, rating >= 0, True)
+
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+| id      | title      | employer_id      | description      | min_salary      | max_salary      | avg_salary      | city      | state      | rating      |
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+| 1       | Sr Data Scientist | 1                |                  | 137             | 171             | 154             | New York  | NY         | 3.1         |
+| 5       | Data Scientist | 5                |                  | 137             | 171             | 154             | New York  | NY         | 2.9         |
+| 20      | Data Scientist | 20               |                  | 137             | 171             | 154             | New York  | NY         | 3.2         |
+| 21      | Data Scientist/Machine Learning | 21               |                  | 137             | 171             | 154             | New York  | NY         | 4.3         |
+| NULL    | NULL       | NULL             | NULL             | NULL            | NULL            | NULL            | NULL      | NULL       | NULL        |
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+5 rows
