@@ -28,8 +28,8 @@ app.get("/api/getJobs/:title/:city/:state/:min_salary/:max_salary/:rating", (req
     `SELECT * \
     FROM JobPosting \
     WHERE IF (${isTitle}, UPPER(title) LIKE UPPER('%${title}%'), True) AND \
-        IF (${isLocation}, UPPER(city) = UPPER(${city}) AND \
-                  UPPER(state) = UPPER(${state}), True) AND \
+        IF (${isLocation}, UPPER(city) = UPPER('${city}') AND \
+                  UPPER(state) = UPPER('${state}'), True) AND \
         IF (${isSalary}, avg_salary BETWEEN ${min_salary} AND ${max_salary}, True) AND \
         IF (${isRating}, rating >= ${rating}, True)` , (err, result)=>{
           if(err) {
