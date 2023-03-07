@@ -18,18 +18,20 @@ app.get("/api/getJobs/:title/:city/:state/:min_salary/:max_salary/:rating", (req
 
 
   const isTitle = title !== "null" 
-  const isLocation = city !== "null" & state !== "null"
-  isSalary = min_salary !== "null" & max_salary !== "null"
-  isRating = rating !== "null" 
+  const isLocation = city !== "null" && state !== "null"
+  const isSalary = min_salary !== "null" && max_salary !== "null"
+  const isRating = rating !== "null" 
+
+
 
   db.query(
-    "SELECT * \
+    `SELECT * \
     FROM JobPosting \
     WHERE IF (${isTitle}, UPPER(title) LIKE UPPER('%${title}%'), True) AND \
         IF (${isLocation}, UPPER(city) = UPPER(${city}) AND \
                   UPPER(state) = UPPER(${state}), True) AND \
         IF (${isSalary}, avg_salary BETWEEN ${min_salary} AND ${max_salary}, True) AND \
-        IF (${isRating}, rating >= ${rating}, True)" , (err, result)=>{
+        IF (${isRating}, rating >= ${rating}, True)` , (err, result)=>{
           if(err) {
             console.log(err)
           } 
