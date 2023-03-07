@@ -9,9 +9,9 @@ app.use(express.json())
 
 // Route
 app.get("/api/getJobs/:title/:city/:state/:min_salary/:max_salary/:rating", (req,res)=>{
-  const title = req.params.title
-  const city = req.params.city
-  const state = req.params.state
+  const title = req.params.title.replace("&"," ")
+  const city = (req.params.city).replace("&"," ")
+  const state = req.params.state.replace("&"," ")
   const min_salary = req.params.min_salary
   const max_salary = req.params.max_salary
   const rating = req.params.rating
