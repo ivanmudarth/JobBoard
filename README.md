@@ -5,6 +5,11 @@ The project currently has Feature 4 implemented which is displaying all of the j
 
 <details>
 <summary>How to run the project</summary>
+
+To set up the client, navigate to `/client` and run `npm install` to install required dependencies. Then run the web app using `npm start`.
+  
+The server (which the client depends on) can be started by running `node Server/index.js`.
+  
 </details>
 
 <details>
