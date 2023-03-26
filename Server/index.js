@@ -41,6 +41,44 @@ app.get("/api/getJobs/:title/:city/:state/:min_salary/:max_salary/:rating", (req
 
 });
 
+// Sign In
+app.get("/api/signIn/:username/:password", (req,res)=>{
+
+  const username = req.params.username
+  const password = req.params.password
+
+  db.query(
+    `SELECT ID \
+    FROM User \
+    WHERE 
+    username = '${username}' AND 
+    password = '${password}'`, (err, result)=>{
+      if(err) {
+        console.log(err)
+      } 
+      res.send(result)
+    }
+  );
+});
+
+
+// Sign Up
+app.get("/api/signUp/:name/:username/:password", (req,res)=>{
+  const name = req.params.name
+  const username = req.params.username
+  const password = req.params.password
+
+  db.query(
+    `INSERT INTO User \
+    (username, password, name) VALUES \ 
+    ('${username}', '${password}', '${name}')`, (err, result)=>{
+      if(err) {
+        console.log(err)
+      } 
+      res.send(result)
+    }
+  );
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
