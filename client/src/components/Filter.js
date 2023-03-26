@@ -17,14 +17,18 @@ import {
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 
 // TODO:
 // min/max fields should be restricted to nums
 // bug where filter cannot be applied again without refresh
+// Show all jobs on intial lauch rather than only when they click submit 
+// Show name for replies rather than user id 
 
 function Filter() {
   const navigate = useNavigate();
+  const {id} = useParams();
 
   const [state, setState] = useState({
     keyword: "",
@@ -46,6 +50,7 @@ function Filter() {
   const handleSubmit = (e) => {
     getJobs();
     // setState({ jobs: getJobs() });
+    console.log(id)
   };
 
   function handleView(title) {
@@ -107,7 +112,7 @@ function Filter() {
       <Td>{item.avg_salary}</Td>
       <Td>{item.rating}</Td>
       <Td>
-        <Button as={Link} to={`/view/${item.id}`}>View</Button>
+        <Button as={Link} to={`/view/${item.id}/${id}`}>View</Button>
       </Td>
     </Tr>
   ));

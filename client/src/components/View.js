@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 
 function View() {
-  const { id } = useParams();
+  const { id, userID } = useParams();
 
   const [state, setState] = useState({
     title: "",
@@ -87,7 +87,7 @@ function View() {
   };
 
   async function postReply() {
-    const user_id = 1; // TODO: get user id from auth
+    const user_id = userID; // TODO: get user id from auth 
     console.log(state.reply_input)
     const response = await fetch("/api/postReply/" + user_id + "/" + id, {
       method: "POST",

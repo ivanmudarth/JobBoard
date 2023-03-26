@@ -12,8 +12,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/filter/" element={<Filter/>} />
-        <Route path="/view/:id" element={<View />} />
+        <Route path="/filter/:id" element={<Filter/>} />
+        <Route path="/view/:id/:userID" element={<View />} />
       </Routes>
        </ChakraProvider>
     </div>

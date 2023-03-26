@@ -26,7 +26,12 @@ export default function SignupCard(props) {
     const navigate = useNavigate();
 
 
-    function handleSignUp() {
+    
+    const handleSubmit = (e) => {
+        handleSignUp() 
+      };
+
+    async function handleSignUp() {
         fetch(
             "/api/signUp/" + name + "/" + username + "/" + password
         ).then((response) => response.json())
@@ -35,7 +40,9 @@ export default function SignupCard(props) {
                     "/api/signIn/" + username + "/" + password
                 ).then((response) => response.json())
                     .then((res) => {
-                        // Naviagate to Filter with res as ID 
+                        const id = res[0].ID
+                        console.log(id)
+                        navigate(`/filter/${id}`)
                     });
             });
     }
@@ -99,7 +106,7 @@ export default function SignupCard(props) {
                                 _hover={{
                                     bg: 'blue.500',
                                 }}
-                                onClick={handleSignUp()}>
+                                onClick={handleSubmit}>
                                 Sign up
                             </Button>
                         </Stack>

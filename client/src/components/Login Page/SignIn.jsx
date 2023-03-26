@@ -34,6 +34,10 @@ export default function SignInCard(props) {
   const [username, setUsername] = useState(" ");
   const [password, setPassword] = useState(" ");
   const navigate = useNavigate();
+  
+  const handleSubmit = (e) => {
+    handleSignIn() 
+  };
 
   function handleSignIn() {
     fetch(
@@ -41,6 +45,8 @@ export default function SignInCard(props) {
     ).then((response) => response.json())
       .then((res) => {
         // Naviagate to Filter with res as ID 
+        const id = res[0].ID
+        navigate(`/filter/${id}`)
       });
   }
 
@@ -107,7 +113,7 @@ export default function SignInCard(props) {
               </Button>
             </HStack>
             <Stack spacing="6">
-              <Button colorScheme='teal' variant='solid' onClick={handleSignIn()}>Sign in</Button>
+              <Button colorScheme='teal' variant='solid' onClick={handleSubmit}>Sign in</Button>
             </Stack>
           </Stack>
         </Box>

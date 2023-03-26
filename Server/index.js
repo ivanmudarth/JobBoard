@@ -114,7 +114,7 @@ app.post("/api/postReply/:user_id/:job_id", (req, res) => {
 });
 
 // Sign Up
-app.get("/api/signUp/:name/:username/:password", (req, res) => {
+app.post("/api/signUp/:name/:username/:password", (req, res) => {
   const name = req.params.name;
   const username = req.params.username;
   const password = req.params.password;
