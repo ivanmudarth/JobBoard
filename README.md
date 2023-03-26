@@ -3,6 +3,8 @@
 
 The project currently has Feature 4 implemented which is displaying all of the jobs in our databse and being able to filter the jobs by parameters. 
 
+![IMG_2854](https://user-images.githubusercontent.com/30390967/223331565-c62671f3-4e24-4153-befd-5a6c2cdeda99.jpg)
+
 <details>
 <summary>How to run the project</summary>
 

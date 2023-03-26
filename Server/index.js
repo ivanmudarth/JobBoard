@@ -2,10 +2,10 @@ const express = require("express");
 const app = express();
 const db = require("./config/db");
 const port = 3001;
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 
 app.use(express.json());
-app.use(bodyParser.text({ type: 'text/plain' }))
+app.use(bodyParser.text({ type: "text/plain" }));
 
 // getJobs
 app.get(
@@ -74,9 +74,28 @@ app.get("/api/getReplies/:id", (req, res) => {
     }
   );
 });
+// Sign In
+app.get("/api/signIn/:username/:password", (req, res) => {
+  const username = req.params.username;
+  const password = req.params.password;
+
+  db.query(
+    `SELECT ID \
+    FROM User \
+    WHERE 
+    username = '${username}' AND 
+    password = '${password}'`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+});
 
 // postReplies
-app.post('/api/postReply/:user_id/:job_id', (req, res) => {
+app.post("/api/postReply/:user_id/:job_id", (req, res) => {
   const user_id = req.params.user_id;
   const job_id = req.params.job_id;
   const text = req.body;
@@ -85,6 +104,25 @@ app.post('/api/postReply/:user_id/:job_id', (req, res) => {
   db.query(
     `INSERT INTO Reply \
     VALUES (${job_id}, ${user_id}, '${text}', NOW())`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+});
+
+// Sign Up
+app.get("/api/signUp/:name/:username/:password", (req, res) => {
+  const name = req.params.name;
+  const username = req.params.username;
+  const password = req.params.password;
+
+  db.query(
+    `INSERT INTO User \
+    (username, password, name) VALUES \ 
+    ('${username}', '${password}', '${name}')`,
     (err, result) => {
       if (err) {
         console.log(err);
