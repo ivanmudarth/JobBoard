@@ -13,15 +13,19 @@ import {
   Td,
   VStack,
   Flex,
-  Spacer,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
+
 
 // TODO:
 // min/max fields should be restricted to nums
 // bug where filter cannot be applied again without refresh
 
 function Filter() {
+  const navigate = useNavigate();
+
   const [state, setState] = useState({
     keyword: "",
     city: "",
@@ -43,6 +47,11 @@ function Filter() {
     getJobs();
     // setState({ jobs: getJobs() });
   };
+
+  function handleView(title) {
+    console.log(title);
+    navigate('/view');
+  }
 
   async function getJobs() {
     const q_keyword = state.keyword
@@ -97,6 +106,9 @@ function Filter() {
       <Td>{item.state}</Td>
       <Td>{item.avg_salary}</Td>
       <Td>{item.rating}</Td>
+      <Td>
+        <Button as={Link} to={`/view/${item.id}`}>View</Button>
+      </Td>
     </Tr>
   ));
 
