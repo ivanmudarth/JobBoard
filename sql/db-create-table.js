@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 
 var db = mysql.createConnection({
-    database: "job_board_app_8",
+    database: "job_board_app_10",
     host: "localhost",
     user: "root",
     password: "password"
@@ -15,7 +15,7 @@ var db = mysql.createConnection({
   
   let sql_create_employer =
     "CREATE TABLE Employer( \
-          id INT AUTO_INCREMENT, \
+          id INT IDENTITY(1,1), \
           name VARCHAR(255), \
           employee_count VARCHAR(255), \
           revenue VARCHAR(255), \
