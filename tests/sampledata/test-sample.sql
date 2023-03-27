@@ -36,3 +36,30 @@ WHERE IF (False, UPPER(title) LIKE UPPER('%%'), True) AND
 	  IF (True, UPPER(city) = UPPER('New York') AND UPPER(state) = UPPER('NY'), True) AND
 	  IF (False, avg_salary BETWEEN 0 AND 0, True) AND
 	  IF (False, rating >= 0, True)
+
+
+-- Feature 5 
+
+-- Insert new employer
+INSERT INTO Employer (name, employee_count, revenue, ownership_type, city, state)
+VALUES ('New Employer', 100, 1000000, 'Private', 'New York', 'NY');
+
+-- Insert new job posting
+INSERT INTO JobPosting (title, employer_id, description, min_salary, 
+												max_salary, avg_salary, city, state, rating)
+VALUES ('New Job Posting', LAST_INSERT_ID(), 
+				'Description of new job posting', 
+				50000, 70000, 60000, 'New York', 'NY', 4.5);
+
+SELECT * FROM Employer ORDER BY id DESC LIMIT 2;
+SELECT * FROM JobPosting ORDER BY id DESC LIMIT 2;
+
+
+-- Existing employer adding job (id = 8)
+INSERT INTO JobPosting (title, employer_id, description, min_salary, 
+												max_salary, avg_salary, city, state, rating)
+VALUES ('New Job Posting 2', 8, 
+				'Description of new job posting', 
+				70000, 90000, 80000, 'New York', 'NY', 4.5);
+				
+SELECT * FROM JobPosting WHERE employer_id=8
