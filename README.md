@@ -18,7 +18,7 @@ The server (which the client depends on) can be started by running `node Server/
 <summary>How to create and load sample database</summary>
 <br />
 
-In ```create-tables.js``` we create and connect to our local databse naming it ```job_board_app```
+In ```create-tables.js``` we create and connect to our local databse naming it ```job_board_app``` -- CHANGE THIS 
 
 <br />
 The process of populating the database with our sample data starts from a CSV file which we imported using the “Table Data Import Wizard” on MySQL Workbench. This tool allows us to select which fields in our MySQL tables we want to populate with CSV data. By the end we filled our Employer, Industry, and JobPosting tables with data from these 30 entries. 

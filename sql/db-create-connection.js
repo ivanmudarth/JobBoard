@@ -17,7 +17,7 @@ db.connect(function(err) {
 });
 
 // Create DB
-let sql_create_db = "CREATE DATABASE job_board_app_17";
+let sql_create_db = "CREATE DATABASE job_board_sample_db";
 db.query(sql_create_db, (err) => {
   if (err) {
     throw err;

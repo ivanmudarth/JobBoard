@@ -1,4 +1,4 @@
-const fileName = "sample-data.csv";
+const fileName = "testdec.csv";
 const csvtojson = require('csvtojson');
 const { title } = require('process');
 var mysql = require('mysql');
@@ -6,7 +6,7 @@ var mysql = require('mysql');
 csvtojson().fromFile(fileName).then(source => {
 
     var db = mysql.createConnection({
-        database: "job_board_app_17",
+        database: "job_board_sample_db",
         host: "localhost",
         user: "root",
         password: "password"
@@ -23,7 +23,7 @@ csvtojson().fromFile(fileName).then(source => {
         const city = source[i]["Employer City"]
         const state = source[i]["Employer State"]
         const industry = source[i]["Industry"]
-
+        const desc = source[i]["Job Description"]
 
         // Job Posting
         const title = source[i]["Job Title"]
@@ -56,9 +56,10 @@ csvtojson().fromFile(fileName).then(source => {
             }
         });
 
-        var insertStatement = (`INSERT INTO JobPosting (title, employer_id, min_salary, max_salary, avg_salary, city, state, rating) VALUES ('${title}', LAST_INSERT_ID(), '${minSal}','${maxSal}','${avgSal}', '${city_job}', '${state_job}', '${rating}')`);
 
-        db.query(insertStatement, 
+        var insertStatement = (`INSERT INTO JobPosting (title, employer_id, description, min_salary, max_salary, avg_salary, city, state, rating) VALUES (?,LAST_INSERT_ID(),?,?,?,?,?,?,?)`);
+
+        db.query(insertStatement, [title,desc,minSal,maxSal,avgSal,city,state,rating], 
             (err, results, fields) => {
             if (err) {
                 console.log("Unable to insert item at row ", i + 1);

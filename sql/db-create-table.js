@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 
 var db = mysql.createConnection({
-    database: "job_board_app_17",
+    database: "job_board_sample_db",
     host: "localhost",
     user: "root",
     password: "password"
@@ -39,7 +39,7 @@ var db = mysql.createConnection({
           id INT AUTO_INCREMENT, \
           title VARCHAR(255), \
           employer_id INT, \
-          description VARCHAR(255), \
+          description VARCHAR(550), \
           min_salary INT, \
           max_salary INT, \
           avg_salary INT, \
