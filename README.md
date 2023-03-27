@@ -26,9 +26,18 @@ The process of populating the database with our sample data starts from a CSV fi
 </details>
 
 <details>
-<summary>Creating Tables</summary>
+<summary>SQL Code</summary>
 <br />
-Tables for each entity in our Data Relational Model is created in ```create-tables.js```.
+In job-board-app/sql you can find all the sql code used to setup the databse. 
+
+- db-create-connections.js creates a connection to the databse and then creates two databases: ```job_board_sample_db``` and ```job_board_prod_db``` for sample data and production data respectively. 
+```
+  host: "localhost",
+  user: "root",
+  password: "password"
+```
+- db-create-tables.js creates the tables for both databases 
+- db-add-data.js parses through the two data csv files (sample,prod) and adds the data to both databses respectively 
 
 </details>
 
@@ -36,11 +45,18 @@ Tables for each entity in our Data Relational Model is created in ```create-tabl
 <summary>Sample Tests</summary>
 <br />
 
-The queries mentioned in Milestone 1 Report are seen in ```test-sample.sql``` and the output is displayed in ```test-sample.out```
+The queries mentioned in the Report for sample data are seen in ```job-board-app/tests/sampledata/test-sample.sql``` and the output is displayed in ```job-board-app/tests/sampledata/test-sample.out```
 
 </details>
 
 
+<details>
+<summary>Feature Tests on Production</summary>
+<br />
+
+The queries & ouput mentioned in the Report for production data are grouped by feature in ```job-board-app/tests``` 
+
+</details>
 
 
 
