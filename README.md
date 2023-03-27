@@ -30,6 +30,7 @@ To set up the client, navigate to `/client` in another terminal and run `npm ins
 <details>
 <summary>How to create and load sample and production database</summary>
 <br />
+  
 To create and load sample and production databse, navigate to `/sql` and run the following one after another. 
 ```
 node db-create-connections.js
