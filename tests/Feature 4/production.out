@@ -1,0 +1,78 @@
+Execute:
+> SELECT * 
+ FROM JobPosting 
+ WHERE IF (True, UPPER(title) LIKE UPPER('%Sr%'), True) AND 
+ 	  IF (True, UPPER(city) = UPPER('new york') 
+ 		AND UPPER(state) = UPPER('ny'), True) AND
+ 	  IF (True, avg_salary BETWEEN 100 AND 200, True) AND 
+ 	  IF (True, rating >= 3.0, True)
+
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+| id      | title      | employer_id      | description      | min_salary      | max_salary      | avg_salary      | city      | state      | rating      |
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+| 1       | Sr Data Scientist | 1                | Description
+
+The Senior Data Scientist is responsible for defining, building, and improving statistical models to improve business processes and outcomes in one or more healthcare domains such as Clinical, Enrollment, Claims, and Finance. As part of the broader analytics team, Data Scientist will gather and analyze data to solve and address complex business problems and evaluate scenarios to make predictions on future outcomes and work with the business to communicate and support decision-making. This position requires strong analytical skills  | 137             | 171             | 154             | New York  | NY         | 3.1         |
+| NULL    | NULL       | NULL             | NULL             | NULL            | NULL            | NULL            | NULL      | NULL       | NULL        |
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+2 rows
+
+
+Execute:
+> SELECT * 
+FROM JobPosting 
+WHERE IF (False, UPPER(title) LIKE UPPER('%%'), True) AND 
+	  IF (True, UPPER(city) = UPPER('New York') AND UPPER(state) = UPPER('NY'), True) AND
+	  IF (False, avg_salary BETWEEN 0 AND 0, True) AND
+	  IF (False, rating >= 0, True)
+LIMIT 10
+
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+| id      | title      | employer_id      | description      | min_salary      | max_salary      | avg_salary      | city      | state      | rating      |
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+| 1       | Sr Data Scientist | 1                | Description
+
+The Senior Data Scientist is responsible for defining, building, and improving statistical models to improve business processes and outcomes in one or more healthcare domains such as Clinical, Enrollment, Claims, and Finance. As part of the broader analytics team, Data Scientist will gather and analyze data to solve and address complex business problems and evaluate scenarios to make predictions on future outcomes and work with the business to communicate and support decision-making. This position requires strong analytical skills  | 137             | 171             | 154             | New York  | NY         | 3.1         |
+| 5       | Data Scientist | 5                | Data Scientist
+Affinity Solutions / Marketing Cloud seeks smart, curious, technically savvy candidates to join our cutting-edge data science team. We hire the best and brightest and give them the opportunity to work on industry-leading technologies.
+The data sciences team at AFS/Marketing Cloud build models, machine learning algorithms that power all our ad-tech/mar-tech products at scale, develop methodology and tools to precisely and effectively measure market campaign effects, and research in-house and public data sources for consumer spend  | 137             | 171             | 154             | New York  | NY         | 2.9         |
+| 21      | Data Scientist/Machine Learning | 21               | PulsePoint™, a global programmatic advertising platform with specialized healthcare expertise, fuses the science of programmatic targeting, distribution, and optimization with the art of brand engagement. The PulsePoint platform is powered by terabytes of impression-level data, allowing brands to efficiently engage the right audiences at scale while helping publishers increase yield through actionable insights.
+
+Our organization has a strong history of utilizing machine learning, contextualization, and targeting to distribute advertising to the | 137             | 171             | 154             | New York  | NY         | 4.3         |
+| 23      | Business Intelligence Analyst I- Data Insights | 23               | Position Summary
+
+Individuals within the
+Business Intelligence (BI) Analyst I role provide business intelligence,
+reporting, and data analysis needs for Customer Service and Delivery. They work
+closely with BI Consultants, end users, and IT teams to turn data into critical
+information and knowledge that can be used to make sound business decisions. It
+is essential that BI Analysts build an understanding of the CSD organization at
+a level of detail that enables them to identify and address critical issues.
+They provide data that is accurate, con | 137             | 171             | 154             | New York  | NY         | 3.5         |
+| 37      | Data Scientist | 37               | Join Our Growing Team
+A career with A Place for Mom is an opportunity for you to join a rapidly expanding company committed to making a difference for seniors and their families. A Place for Mom is an online platform connecting families searching for senior care services with a team of experienced advisors providing insight-driven and personalized solutions. Our mission, as the leader in senior care advisory, is to be a trusted destination for families and our community customers. We are a quickly growing organization with over 500 advisors con | 75              | 131             | 103             | New York  | NY         | 2.7         |
+| 45      | Computational Scientist, Machine Learning | 45               | ROLE SUMMARY
+
+The Pfizer Simulation and Modeling Sciences (SMS) group has an opening for a computational methods developer with strong expertise in computational biology, bioinformatics, Artificial Intelligence (AI) and Machine Learning (ML). Working with the biotherapeutics group, the successful candidate will leverage skills in sequence analysis, protein structure modeling, machine learning, and scientific programming to develop AI models and computational tools that enable design of antibody therapeutics and prediction of biophysical and the | 75              | 131             | 103             | New York  | NY         | 4.1         |
+| 65      | Data Scientist | 65               | As a Data Scientist, you'll utilize advanced quantitative & statistical analysis techniques to drive business model innovation for Via, and work closely with our senior management to help drive decisions.
+
+What You'll Do
+Adeptly interpret and utilize mass quantities of data to generate innovative hypotheses & insights, and present these insights to the different stakeholders
+Use sophisticated statistical methods to solve problems, leveraging up-to-date academic research and tools
+Quantitatively test hypotheses about customer and driver behavior | 79              | 131             | 105             | New York  | NY         | 3.7         |
+| 75      | Data Engineer, Enterprise Analytics | 75               | Description
+
+The Data Engineer on the Enterprise Analytics team, is responsible for data acquisition strategies and integration scripting and tools, data migrations, conversions, purging and back-ups; fulfills data acquisition strategy requirements. They work with product, financial control, analysts, users and other stakeholders to understand business requirements and supports data architecture to translate into data acquisition strategies.
+
+The Data Engineer will author artifacts defining standards and definitions for storing, processing and  | 79              | 131             | 105             | New York  | NY         | 3.1         |
+| 107     | RFP Data Analyst | 107              | Job Summary
+
+AllianceBernstein’s Request for Proposal Data Team is in search of a Data Associate to support new business development and client service efforts globally through ensuring proper maintenance and quarterly reporting to investment consultant, financial intermediaries and third-party databases on our separately-managed Institutional services, US mutual funds, Lux funds and Retail separately-managed account services. In addition, the RFP Data Associate supports the RFP team by completing the quantitative portions of RFPs, RFIs, and du | 99              | 132             | 115             | New York  | NY         | 3.2         |
+| 112     | Data Scientist | 112              | ***Please note: All hiring and recruitment at Spring Health is handled with a valid '@springhealth.com' email address only or from recruitment firms @hays.com, @oxeonpartners.com, @neptunepeople.com, @rivierapartners.com, or @swingtalent.com. If you receive a message from a sender whose domain is not @springhealth.com, please beware that those communications are not authorized or coming from Spring Health. ***
+
+Our mission: helping individuals and organizations thrive by eliminating every barrier to mental health.
+
+Spring Health is a comprehens | 99              | 132             | 115             | New York  | NY         | 3.6         |
+| NULL    | NULL       | NULL             | NULL             | NULL            | NULL            | NULL            | NULL      | NULL       | NULL        |
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+11 rows

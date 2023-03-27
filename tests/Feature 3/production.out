@@ -1,0 +1,25 @@
+Execute:
+> SELECT * FROM Reply
+
++ ------------------- + ------------ + --------------- + -------------- +
+| job_posting_id      | user_id      | reply_text      | timestamp      |
++ ------------------- + ------------ + --------------- + -------------- +
+| 2                   | 3            | this is my first reply | 2023-03-05 14:56:59 |
+| 2                   | 3            | this is my second reply | 2023-03-05 14:58:00 |
++ ------------------- + ------------ + --------------- + -------------- +
+2 rows
+
+
+Execute:
+> SELECT user_id, reply_text 
+FROM Reply 
+WHERE job_posting_id = 2 
+ORDER BY timestamp DESC
+
++ ------------ + --------------- +
+| user_id      | reply_text      |
++ ------------ + --------------- +
+| 1            | this is my second reply |
+| 1            | this is my first reply |
++ ------------ + --------------- +
+2 rows

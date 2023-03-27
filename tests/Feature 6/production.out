@@ -1,0 +1,25 @@
+Execute:
+> SELECT * FROM Review
+
++ ---------------- + ------------ + ---------------- + ------------------ + -------------- +
+| employer_id      | user_id      | review_text      | review_rating      | timestamp      |
++ ---------------- + ------------ + ---------------- + ------------------ + -------------- +
+| 2                | 3            | this is my first review | 3                  | 2023-03-12 12:23:34 |
+| 2                | 3            | this is my second review | 4                  | 2023-03-13 01:20:30 |
++ ---------------- + ------------ + ---------------- + ------------------ + -------------- +
+2 rows
+
+
+Execute:
+> SELECT user_id, review_text, review_rating, timestamp
+FROM Review 
+WHERE employer_id = 2
+ORDER BY timestamp DESC
+
++ ------------ + ---------------- + ------------------ + -------------- +
+| user_id      | review_text      | review_rating      | timestamp      |
++ ------------ + ---------------- + ------------------ + -------------- +
+| 3            | this is my second review | 4                  | 2023-03-13 01:20:30 |
+| 3            | this is my first review | 3                  | 2023-03-12 12:23:34 |
++ ------------ + ---------------- + ------------------ + -------------- +
+2 rows
