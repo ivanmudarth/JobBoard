@@ -1,0 +1,42 @@
+Execute:
+> SELECT * FROM User
+
++ ------- + ------------- + ------------- + --------- + ---------- + ---------------- +
+| id      | username      | password      | name      | email      | description      |
++ ------- + ------------- + ------------- + --------- + ---------- + ---------------- +
+| 1       | user1         | abcabc        | John Doe  |            |                  |
+| 2       | dhruvs        | pass1         | Dhruv Shah |            |                  |
+| 3       | ivanm         | pass2         | Ivan Mudarth |            |                  |
+| NULL    | NULL          | NULL          | NULL      | NULL       | NULL             |
++ ------- + ------------- + ------------- + --------- + ---------- + ---------------- +
+4 rows
+
+
+Execute:
+> SELECT ID FROM User WHERE username = 'user1' AND password = 'abcabc'
+
++ ------- +
+| ID      |
++ ------- +
+| 1       |
++ ------- +
+
+
+Execute:
+> SELECT ID FROM User WHERE username = 'dhruvs' AND password = 'pass1'
+
++ ------- +
+| ID      |
++ ------- +
+| 2       |
++ ------- +
+
+
+Execute:
+> SELECT ID FROM User WHERE username = 'ivanm' AND password = 'pass2'
+
++ ------- +
+| ID      |
++ ------- +
+| 3       |
++ ------- +

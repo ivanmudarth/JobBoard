@@ -1,0 +1,35 @@
+Execute:
+> SELECT * FROM Shortlist
+
++ ------------ + ------------------- +
+| user_id      | job_posting_id      |
++ ------------ + ------------------- +
+| 2            | 54                  |
+| 3            | 372                 |
+| 3            | 524                 |
++ ------------ + ------------------- +
+3 rows
+
+
+Execute:
+> SELECT DISTINCT job_posting_id FROM Shortlist WHERE user_id = 3
+
++ ------------------- +
+| job_posting_id      |
++ ------------------- +
+| 372                 |
+| 524                 |
++ ------------------- +
+2 rows
+
+
+// After deletion: 
+Execute:
+> SELECT DISTINCT job_posting_id FROM Shortlist WHERE user_id = 3
+
++ ------------------- +
+| job_posting_id      |
++ ------------------- +
+| 372                 |
++ ------------------- +
+1 rows

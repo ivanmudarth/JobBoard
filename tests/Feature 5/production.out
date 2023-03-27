@@ -1,0 +1,55 @@
+Execute:
+> SELECT * FROM Employer ORDER BY id DESC LIMIT 5
+
++ ------- + --------- + ------------------- + ------------ + ------------------- + --------- + ---------- +
+| id      | name      | employee_count      | revenue      | ownership_type      | city      | state      |
++ ------- + --------- + ------------------- + ------------ + ------------------- + --------- + ---------- +
+| 658     | New Employer | 100                 | 1000000      | Private             | New York  | NY         |
+| 657     | 1-800-Flowers | 1001 to 5000 employees | $1 to $2 billion (USD) | Company - Public    | undefined | undefined  |
+| 656     | ChaTeck Incorporated | 1 to 50 employees   | $1 to $5 million (USD) | Company - Private   | undefined | undefined  |
+| 655     | AccessHope | -1                  | -1           | -1                  | undefined | undefined  |
+| 654     | JKGT      | -1                  | -1           | -1                  | undefined | undefined  |
+| NULL    | NULL      | NULL                | NULL         | NULL                | NULL      | NULL       |
++ ------- + --------- + ------------------- + ------------ + ------------------- + --------- + ---------- +
+6 rows
+
+
+Execute:
+> SELECT * FROM JobPosting ORDER BY id DESC LIMIT 2
+
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+| id      | title      | employer_id      | description      | min_salary      | max_salary      | avg_salary      | city      | state      | rating      |
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+| 658     | New Job Posting | 658              | Description of new job posting | 50000           | 70000           | 60000           | New York  | NY         | 4.5         |
+| 657     | Data Scientist | 657              | Description
+
+The Data Scientist will be part of the Enterprise BI team at , Inc. This individual will manage one or more analysts and focus on customer-level advanced analytics for the direct-to-consumer and business-to-business channels.
+
+Responsibilities include, but are not limited to:
+
+As a hands-on analytics leader, deliver actionable insights while prioritizing and managing the workload of junior analysts
+
+Collaborate with business owners and propose appropriate analytics solutions to address critical business questions
+
+Create Tableau da | 105             | 167             | 136             |           |            | 2.7         |
+| NULL    | NULL       | NULL             | NULL             | NULL            | NULL            | NULL            | NULL      | NULL       | NULL        |
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+3 rows
+
+
+
+> SELECT * FROM JobPosting WHERE employer_id=70
+
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+| id      | title      | employer_id      | description      | min_salary      | max_salary      | avg_salary      | city      | state      | rating      |
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+| 70      | Data Scientist, Applied Machine Learning - Bay Area | 70               | Passionate about precision medicine and advancing the healthcare industry?
+
+Recent advancements in underlying technology have finally made it possible for AI to impact clinical care in a meaningful way. Tempus' proprietary platform connects an entire ecosystem of real-world evidence to deliver real-time, actionable insights to physicians, providing critical information about the right treatments for the right patients, at the right time.
+
+We are looking for data scientists who are passionate about applying state of the art techniques to the pro | 79              | 131             | 105             |           |            | 3.3         |
+| 659     | New Job Posting 2 | 70               | Description of new job posting | 70000           | 90000           | 80000           | New York  | NY         | 4.5         |
+| NULL    | NULL       | NULL             | NULL             | NULL            | NULL            | NULL            | NULL      | NULL       | NULL        |
++ ------- + ---------- + ---------------- + ---------------- + --------------- + --------------- + --------------- + --------- + ---------- + ----------- +
+3 rows
+
