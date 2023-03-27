@@ -63,3 +63,12 @@ VALUES ('New Job Posting 2', 8,
 				70000, 90000, 80000, 'New York', 'NY', 4.5);
 				
 SELECT * FROM JobPosting WHERE employer_id=8
+
+-- Feature 6
+INSERT INTO Review VALUES (2, 1, 'this is my first review', 3, '2023-3-12 12:23:34')
+INSERT INTO Review VALUES (2, 1, 'this is my second review', 4, '2023-3-13 1:20:30')
+
+SELECT user_id, review_text, employer_rating, timestamp
+FROM Review 
+WHERE employer_id = 2
+ORDER BY timestamp DESC
