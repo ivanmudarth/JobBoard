@@ -1,4 +1,4 @@
-const fileName = "testdec.csv";
+const fileName = "sampledata.csv";
 const csvtojson = require('csvtojson');
 const { title } = require('process');
 var mysql = require('mysql');
