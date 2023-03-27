@@ -23,7 +23,7 @@ csvtojson().fromFile(fileName).then(source => {
         const city = source[i]["Employer City"]
         const state = source[i]["Employer State"]
         const industry = source[i]["Industry"]
-        const desc = source[i]["Job Description"]
+        const desc = source[i]["Job Description"].substring(0, 550);
 
         // Job Posting
         const title = source[i]["Job Title"]
