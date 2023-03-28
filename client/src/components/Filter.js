@@ -13,6 +13,7 @@ import {
   Td,
   VStack,
   Flex,
+  Text
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -174,6 +175,7 @@ function Filter() {
             <Tbody>{tableRows}</Tbody>
           </Table>
         </Box>
+        {state.jobs.length == 0 && <Text>No jobs found...</Text>}
       </VStack>
     </Center>
   );

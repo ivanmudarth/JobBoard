@@ -1,20 +1,21 @@
-### How to test Feature 3 
+### How to test Feature 3: Filter
 
 To test this feature, once the app is launched, sign in to an account (sign up for an account if you dont have one). 
 
-From there you will be taken the job filter page and see all the jobs in the databse. 
+From there you will be taken the job filter page and see all the jobs in the database. 
 
-<img width="1461" alt="image" src="https://user-images.githubusercontent.com/30390967/228078596-ffcc601c-7e08-41c8-87f9-f7475663389a.png">
+![Screen Shot 2023-03-27 at 9 42 26 PM](https://user-images.githubusercontent.com/33183884/228105177-ca1e308e-ba6e-4a05-a300-1330a43738cd.png)
 
-From here click on the "View" button next to any job which will take you to a detail page for that job. 
-<img width="736" alt="image" src="https://user-images.githubusercontent.com/30390967/228078835-33ef6865-de65-4437-a29e-7f2f208f9d0a.png">
+From here, you have the option to filter all the jobs in the database based on several parameters. To filter by a parameter, simply type in appropriate text field. You can use zero to all parameters. 
 
-> Here you can see that if there are no replies for this given job, it will say "No replies posted..." on the bottom of the page. 
+Once you have filled in the desired text fields, click the submit button. Within a few moments you should see all the job postings that fit the parameters. 
 
-Once here, to test this feature, you can click on the textfield on the bottom of the page labeled "Post a reply" and type in a reply. Once you click the "Post" button you will now see your reply listed under the job along with your used id and the timestamp of your reply. 
+![Screen Shot 2023-03-27 at 9 53 56 PM](https://user-images.githubusercontent.com/33183884/228106573-47aad87b-6cff-44cc-8a9c-867f857711cd.png)
 
-You can write multiple replies and see them stacked on top of each other ordered by time. 
+To ensure the feature is working, you can check that all the fields you filled in match with the results returned in the table. For example, if you type in 3 to the "Rating" field, then all job postings you see should have a rating >= 3.
 
-<img width="1468" alt="image" src="https://user-images.githubusercontent.com/30390967/228079283-93e77a69-c41e-4509-8ea7-1390bf3ec3d3.png">
+Next to each entry in the table is a "View" button. When clicked it will display the corresponding job posting in a new page with more information. To ensure this is working, the values you table entry should correspond with those in the new page that is opened when you click "View."
 
-There are two ways to verify the queries of this feature. Firstly you can check if the reply you made is inserted accuretly into the Reply table. You can also verify that these replies are seen by logging into a new account and clicking on the same job you posted a reply on. Here you should see the previous replies made by the other account. 
+If no jobs match your filter, you should see the "No jobs founds..." message:
+
+![Screen Shot 2023-03-27 at 9 59 50 PM](https://user-images.githubusercontent.com/33183884/228107454-d801bc79-84c4-41cc-9367-a86c22b2c536.png)

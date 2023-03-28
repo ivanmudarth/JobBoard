@@ -1,4 +1,4 @@
-### How to test Feature 1
+### How to test Feature 1: User Authentication
 
 When you first launch the app you will be taken to the landing page and should see the following
 
