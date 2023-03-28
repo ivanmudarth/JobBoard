@@ -14,8 +14,7 @@ import {
   VStack,
   Flex,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 
@@ -27,7 +26,6 @@ import { useParams } from 'react-router-dom';
 // Show name for replies rather than user id 
 
 function Filter() {
-  const navigate = useNavigate();
   const {id} = useParams();
 
   const [state, setState] = useState({
@@ -49,14 +47,11 @@ function Filter() {
 
   const handleSubmit = (e) => {
     getJobs();
-    // setState({ jobs: getJobs() });
-    console.log(id)
   };
 
-  function handleView(title) {
-    console.log(title);
-    navigate('/view');
-  }
+  useEffect(() => {
+    getJobs();
+  }, []);
 
   async function getJobs() {
     const q_keyword = state.keyword
@@ -67,22 +62,6 @@ function Filter() {
     const q_salary_min = state.salary_min ? state.salary_min : "null";
     const q_salary_max = state.salary_max ? state.salary_max : "null";
     const q_rating_min = state.rating_min ? state.rating_min : "null";
-    console.log(state.city.replace(/\s/g, "&"));
-    // "/api/getJobs/null/New&York/NY/null/null/null"
-    console.log(
-      "/api/getJobs/" +
-        q_keyword +
-        "/" +
-        q_city +
-        "/" +
-        q_state +
-        "/" +
-        q_salary_min +
-        "/" +
-        q_salary_max +
-        "/" +
-        q_rating_min
-    );
     fetch(
       "/api/getJobs/" +
         q_keyword +
@@ -181,7 +160,7 @@ function Filter() {
             </Button>
           </FormControl>
         </Box>
-        <Box>
+        <Box overflowY="scroll" maxHeight="800px">
           <Table variant="simple">
             <Thead>
               <Tr>

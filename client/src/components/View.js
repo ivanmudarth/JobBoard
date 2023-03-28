@@ -5,18 +5,9 @@ import {
   Center,
   Input,
   Button,
-  FormControl,
-  FormLabel,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
   VStack,
   HStack,
   Text,
-  Flex,
 } from "@chakra-ui/react";
 
 function View() {
@@ -26,6 +17,7 @@ function View() {
     title: "",
     city: "",
     state: "",
+    description: "",
     avg_salary: "",
     rating: "",
     replies: [],
@@ -43,6 +35,7 @@ function View() {
       title: data1[0].title,
       city: data1[0].city,
       state: data1[0].state,
+      description: data1[0].description,
       avg_salary: data1[0].avg_salary,
       rating: data1[0].rating,
       replies: data2,
@@ -87,7 +80,7 @@ function View() {
   };
 
   async function postReply() {
-    const user_id = userID; // TODO: get user id from auth 
+    const user_id = userID;
     console.log(state.reply_input)
     const response = await fetch("/api/postReply/" + user_id + "/" + id, {
       method: "POST",
@@ -117,13 +110,7 @@ function View() {
           </Text>
 
           <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            {state.description} ...
           </Text>
         </Box>
         <Box w="750px" fontSize="xl">
