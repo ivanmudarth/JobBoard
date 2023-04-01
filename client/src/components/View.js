@@ -9,6 +9,7 @@ import {
   HStack,
   Text,
 } from "@chakra-ui/react";
+import Navbar from "./NavBar";
 
 function View() {
   const { id, userID } = useParams();
@@ -81,7 +82,7 @@ function View() {
 
   async function postReply() {
     const user_id = userID;
-    console.log(state.reply_input)
+    console.log(state.reply_input);
     const response = await fetch("/api/postReply/" + user_id + "/" + id, {
       method: "POST",
       headers: {
@@ -93,48 +94,56 @@ function View() {
   }
 
   return (
-    <Center>
-      <VStack>
-        <Box p={10} w="750px" borderRadius="lg" borderWidth="2px" mt={6} mb={4}>
-          <Text as="b" fontSize="3xl">
-            {state.title}
-          </Text>
+    <Box>
+      <Navbar user_id={userID}/>
+      <Center>
+        <VStack>
+          <Box
+            p={10}
+            w="750px"
+            borderRadius="lg"
+            borderWidth="2px"
+            mt={6}
+            mb={4}
+          >
+            <Text as="b" fontSize="3xl">
+              {state.title}
+            </Text>
 
-          <Text fontSize="xl">
-            {state.city}, {state.state}{" "}
-            <span style={{ fontSize: "1.5em" }}> &middot; </span>{" "}
-            {state.avg_salary}k / year
-          </Text>
-          <Text mb={4} fontSize="xl">
-            Rating: {state.rating} / 5{" "}
-          </Text>
+            <Text fontSize="xl">
+              {state.city}, {state.state}{" "}
+              <span style={{ fontSize: "1.5em" }}> &middot; </span>{" "}
+              {state.avg_salary}k / year
+            </Text>
+            <Text mb={4} fontSize="xl">
+              Rating: {state.rating} / 5{" "}
+            </Text>
 
-          <Text>
-            {state.description} ...
-          </Text>
-        </Box>
-        <Box w="750px" fontSize="xl">
-          <Text ml={2}>Replies:</Text>
-        </Box>
-        <Box w="750px">
-          <HStack>
-            <Input
-              mb={4}
-              value={state.reply_input}
-              onChange={handleChange}
-              placeholder="Post a reply"
-              size="md"
-              name="reply_input"
-            />
-            <Button colorScheme="gray" onClick={handlePost}>
-              Post
-            </Button>
-          </HStack>
-        </Box>
-        {state.replies.length > 0 && listReplies}
-        {state.replies.length == 0 && <Text>No replies posted...</Text>}
-      </VStack>
-    </Center>
+            <Text>{state.description} ...</Text>
+          </Box>
+          <Box w="750px" fontSize="xl">
+            <Text ml={2}>Replies:</Text>
+          </Box>
+          <Box w="750px">
+            <HStack>
+              <Input
+                mb={4}
+                value={state.reply_input}
+                onChange={handleChange}
+                placeholder="Post a reply"
+                size="md"
+                name="reply_input"
+              />
+              <Button colorScheme="gray" onClick={handlePost}>
+                Post
+              </Button>
+            </HStack>
+          </Box>
+          {state.replies.length > 0 && listReplies}
+          {state.replies.length == 0 && <Text>No replies posted...</Text>}
+        </VStack>
+      </Center>
+    </Box>
   );
 }
 
