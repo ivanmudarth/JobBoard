@@ -11,12 +11,16 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import Navbar from "./NavBar";
+import { useNavigate } from 'react-router-dom';
 
 function View() {
   const { id, userID } = useParams();
+  const navigate = useNavigate();
 
   const [state, setState] = useState({
     title: "",
+    employer: "",
+    employer_id: 0,
     city: "",
     state: "",
     description: "",
@@ -36,8 +40,13 @@ function View() {
     const data2 = await response2.json();
     const data3 = await response3.json();
 
+    const response4 = await fetch("/api/getEmployer/" + data1[0].employer_id);
+    const data4 = await response4.json();
+
     setState({
       title: data1[0].title,
+      employer: data4[0].name,
+      employer_id: data1[0].employer_id,
       city: data1[0].city,
       state: data1[0].state,
       description: data1[0].description,
@@ -113,6 +122,11 @@ function View() {
     });
   }
 
+  const handleClick = () => {
+    console.log(state.employer_id)
+    navigate(`/employer/${state.employer_id}/${userID}`)
+  };
+
   return (
     <Box>
       <Navbar user_id={userID} />
@@ -137,6 +151,15 @@ function View() {
                 {state.is_shortlisted ? "Shortlisted" : "Shortlist"}
               </Button>
             </Flex>
+
+            <Text
+              color="blue.500"
+              fontSize="xl"
+              _hover={{ color: "blue.300", cursor: "pointer" }}
+              onClick={handleClick}
+              >
+              {state.employer}
+            </Text>
 
             <Text fontSize="xl">
               {state.city}, {state.state}{" "}

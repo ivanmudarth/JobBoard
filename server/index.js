@@ -58,6 +58,23 @@ app.get("/api/getJob/:id", (req, res) => {
   );
 });
 
+// getEmployer
+app.get("/api/getEmployer/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.query(
+    `SELECT * \
+    FROM Employer \
+    WHERE id = ${id}`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+});
+
 // getReplies
 app.get("/api/getReplies/:id", (req, res) => {
   const id = req.params.id;
@@ -66,6 +83,23 @@ app.get("/api/getReplies/:id", (req, res) => {
     `SELECT * \
     FROM Reply \
     WHERE job_posting_id = ${id}`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+});
+
+// getReviews
+app.get("/api/getReviews/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.query(
+    `SELECT * \
+    FROM Review \
+    WHERE employer_id = ${id}`,
     (err, result) => {
       if (err) {
         console.log(err);
@@ -105,6 +139,26 @@ app.post("/api/postReply/:user_id/:job_id", (req, res) => {
   db.query(
     `INSERT INTO Reply \
     VALUES (${job_id}, ${user_id}, '${text}', NOW())`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+});
+
+// postReview
+app.post("/api/postReview/:user_id/:job_id/:review", (req, res) => {
+  const user_id = req.params.user_id;
+  const job_id = req.params.job_id;
+  const review = req.params.review
+  const text = req.body;
+  const timestamp = 0;
+
+  db.query(
+    `INSERT INTO Review \
+    VALUES (${job_id}, ${user_id}, '${text}','${review}',  NOW())`,
     (err, result) => {
       if (err) {
         console.log(err);
