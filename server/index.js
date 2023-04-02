@@ -74,6 +74,7 @@ app.get("/api/getReplies/:id", (req, res) => {
     }
   );
 });
+
 // Sign In
 app.get("/api/signIn/:username/:password", (req, res) => {
   const username = req.params.username;
@@ -123,6 +124,23 @@ app.get("/api/signUp/:name/:username/:password", (req, res) => {
     `INSERT INTO User \
     (username, password, name) VALUES \ 
     ('${username}', '${password}', '${name}')`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+});
+
+// getUserInfo
+app.get("/api/getUserInfo/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.query(
+    `SELECT * \
+    FROM User \
+    WHERE id = ${id}`,
     (err, result) => {
       if (err) {
         console.log(err);

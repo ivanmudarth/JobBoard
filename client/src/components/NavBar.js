@@ -5,7 +5,7 @@ function Navbar(props) {
     <Flex p={6} bg="gray.50" justifyContent="center">
       <HStack>
         <Box>
-          <Link href="/home">Home</Link>
+          <Link href={`/home/${props.user_id}`}>Home</Link>
         </Box>
         <Spacer />
         <Spacer />
