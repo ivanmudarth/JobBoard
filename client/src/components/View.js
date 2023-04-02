@@ -8,6 +8,7 @@ import {
   VStack,
   HStack,
   Text,
+  Flex,
 } from "@chakra-ui/react";
 import Navbar from "./NavBar";
 
@@ -23,14 +24,17 @@ function View() {
     rating: "",
     replies: [],
     reply_input: "",
+    is_shortlisted: true,
   });
 
   const fetchData = async () => {
     const response1 = await fetch("/api/getJob/" + id);
     const response2 = await fetch("/api/getReplies/" + id);
+    const response3 = await fetch("/api/isShortlisted/" + userID + "/" + id);
 
     const data1 = await response1.json();
     const data2 = await response2.json();
+    const data3 = await response3.json();
 
     setState({
       title: data1[0].title,
@@ -40,6 +44,7 @@ function View() {
       avg_salary: data1[0].avg_salary,
       rating: data1[0].rating,
       replies: data2,
+      is_shortlisted: data3.length > 0,
     });
   };
 
@@ -82,7 +87,6 @@ function View() {
 
   async function postReply() {
     const user_id = userID;
-    console.log(state.reply_input);
     const response = await fetch("/api/postReply/" + user_id + "/" + id, {
       method: "POST",
       headers: {
@@ -93,9 +97,25 @@ function View() {
     fetchData();
   }
 
+  const handleShortlist = (e) => {
+    postShortlist();
+    fetchData();
+  };
+
+  async function postShortlist() {
+    const user_id = userID;
+    const response = await fetch("/api/postShortlist/" + user_id + "/" + id, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain",
+      },
+      body: "",
+    });
+  }
+
   return (
     <Box>
-      <Navbar user_id={userID}/>
+      <Navbar user_id={userID} />
       <Center>
         <VStack>
           <Box
@@ -106,9 +126,17 @@ function View() {
             mt={6}
             mb={4}
           >
-            <Text as="b" fontSize="3xl">
-              {state.title}
-            </Text>
+            <Flex justifyContent="space-between">
+              <Text as="b" fontSize="3xl">
+                {state.title}
+              </Text>
+              <Button
+                onClick={handleShortlist}
+                isDisabled={state.is_shortlisted}
+              >
+                {state.is_shortlisted ? "Shortlisted" : "Shortlist"}
+              </Button>
+            </Flex>
 
             <Text fontSize="xl">
               {state.city}, {state.state}{" "}
@@ -140,7 +168,7 @@ function View() {
             </HStack>
           </Box>
           {state.replies.length > 0 && listReplies}
-          {state.replies.length == 0 && <Text>No replies posted...</Text>}
+          {state.replies.length === 0 && <Text>No replies posted...</Text>}
         </VStack>
       </Center>
     </Box>

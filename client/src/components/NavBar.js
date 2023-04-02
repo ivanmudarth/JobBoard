@@ -1,4 +1,4 @@
-import { Flex, Box, Spacer, Link, HStack, Center } from "@chakra-ui/react";
+import { Flex, Box, Spacer, Link, HStack } from "@chakra-ui/react";
 
 function Navbar(props) {
   return (
@@ -10,7 +10,7 @@ function Navbar(props) {
         <Spacer />
         <Spacer />
         <Spacer />
-        <Box >
+        <Box>
           <Link href={`/filter/${props.user_id}`}>Filter</Link>
         </Box>
         <Spacer />

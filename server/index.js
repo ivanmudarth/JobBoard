@@ -95,7 +95,7 @@ app.get("/api/signIn/:username/:password", (req, res) => {
   );
 });
 
-// postReplies
+// postReply
 app.post("/api/postReply/:user_id/:job_id", (req, res) => {
   const user_id = req.params.user_id;
   const job_id = req.params.job_id;
@@ -141,6 +141,76 @@ app.get("/api/getUserInfo/:id", (req, res) => {
     `SELECT * \
     FROM User \
     WHERE id = ${id}`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+});
+
+// postShortlist
+app.post("/api/postShortlist/:user_id/:job_id", (req, res) => {
+  const user_id = req.params.user_id;
+  const job_id = req.params.job_id;
+
+  db.query(
+    `INSERT INTO Shortlist \
+    VALUES (${user_id}, ${job_id})`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+});
+
+// getShortlist
+app.get("/api/getShortlist/:user_id", (req, res) => {
+  const id = req.params.user_id;
+
+  db.query(
+    `SELECT * \
+    FROM JobPosting, Shortlist  \
+    WHERE user_id = ${id}
+    AND JobPosting.id = Shortlist.job_posting_id`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+});
+
+// removeShortlist
+app.post("/api/removeShortlist/:user_id/:job_id", (req, res) => {
+  const user_id = req.params.user_id;
+  const job_id = req.params.job_id;
+
+  db.query(
+    `DELETE FROM Shortlist \
+    WHERE user_id = ${user_id} AND job_posting_id = ${job_id}`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+});
+
+// isShortlisted
+app.get("/api/isShortlisted/:user_id/:job_id", (req, res) => {
+  const user_id = req.params.user_id;
+  const job_id = req.params.job_id;
+
+  db.query(
+    `SELECT * \
+    FROM Shortlist  \
+    WHERE user_id = ${user_id} AND job_posting_id = ${job_id}`,
     (err, result) => {
       if (err) {
         console.log(err);

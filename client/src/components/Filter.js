@@ -101,7 +101,7 @@ function Filter() {
 
   return (
     <Box>
-      <Navbar user_id={id}/>
+      <Navbar user_id={id} />
       <Center>
         <VStack>
           <Box maxW="md" mt={6}>
@@ -179,7 +179,7 @@ function Filter() {
               <Tbody>{tableRows}</Tbody>
             </Table>
           </Box>
-          {state.jobs.length == 0 && <Text>No jobs found...</Text>}
+          {state.jobs.length === 0 && <Text>No jobs found...</Text>}
         </VStack>
       </Center>
     </Box>
