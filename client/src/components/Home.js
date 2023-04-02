@@ -6,6 +6,7 @@ import {
   VStack,
   HStack,
   Text,
+  Image,
 } from "@chakra-ui/react";
 import Navbar from "./NavBar";
 import { useParams } from "react-router-dom";
@@ -21,7 +22,8 @@ function Home() {
     shortlist: [],
   });
 
-  const fetchData = async () => { // TODO: 
+  const fetchData = async () => {
+    // TODO:
     const response1 = await fetch("/api/getUserInfo/" + id);
     const response2 = await fetch("/api/getReplies/" + id);
 
@@ -55,6 +57,11 @@ function Home() {
           >
             <Center>
               <VStack>
+                <Image
+                  src="https://global-uploads.webflow.com/620c0d2e51cac37f5958848f/620c0d2e51cac30973588b05_60d39b4a9632142dfe527b0b_AdobeStock_346839683.jpeg"
+                  boxSize="200px"
+                />
+
                 <Text as="b" fontSize="3xl">
                   {state.name}
                 </Text>
