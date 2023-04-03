@@ -2,7 +2,7 @@
 
 To test this feature, once the app is launched, sign in to an account (sign up for an account if you dont have one). 
 
-From there you will be taken the job filter page and see all the jobs in the databse. 
+From there you will be taken the Home page. Navigate to the job filter page by clicking on Filter in the Nav bar on the top and see all the jobs in the databse. 
 
 <img width="1461" alt="image" src="https://user-images.githubusercontent.com/30390967/228078596-ffcc601c-7e08-41c8-87f9-f7475663389a.png">
 
