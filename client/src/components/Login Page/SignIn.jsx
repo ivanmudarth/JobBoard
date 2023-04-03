@@ -50,7 +50,7 @@ export default function SignInCard(props) {
       .then((res) => {
         // Navigate to Filter with res as ID 
         const id = res[0].ID;
-        navigate(`/filter/${id}`);
+        navigate(`/home/${id}`);
       })
       .catch((error) => {
         console.log("An error occurred:", error);

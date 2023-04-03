@@ -42,7 +42,7 @@ export default function SignupCard(props) {
                     .then((res) => {
                         const id = res[0].ID
                         console.log(id)
-                        navigate(`/filter/${id}`)
+                        navigate(`/home/${id}`)
                     });
             });
     }
