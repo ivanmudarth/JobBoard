@@ -11,7 +11,9 @@ import {
   Tr,
   Th,
   Td,
+  IconButton
 } from "@chakra-ui/react";
+import { FaEdit } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import Navbar from "./NavBar";
 import { useParams } from "react-router-dom";
@@ -41,6 +43,15 @@ function Home() {
       description: data1[0].description,
       shortlist: data2,
     });
+  };
+
+  const [imageUrl, setImageUrl] = useState(
+    'https://global-uploads.webflow.com/620c0d2e51cac37f5958848f/620c0d2e51cac30973588b05_60d39b4a9632142dfe527b0b_AdobeStock_346839683.jpeg'
+  );
+
+  const handleImageChange = (e) => {
+    const newImageUrl = URL.createObjectURL(e.target.files[0]);
+    setImageUrl(newImageUrl);
   };
 
   useEffect(() => {
@@ -99,10 +110,28 @@ function Home() {
           >
             <Center>
               <VStack>
-                <Image
-                  src="https://global-uploads.webflow.com/620c0d2e51cac37f5958848f/620c0d2e51cac30973588b05_60d39b4a9632142dfe527b0b_AdobeStock_346839683.jpeg"
-                  boxSize="200px"
+              <Box position="relative" w="200px" h="200px">
+                <Image src={imageUrl} w="100%" h="100%" objectFit="cover" />
+                <IconButton
+                  position="absolute"
+                  top="0"
+                  right="0"
+                  size="sm"
+                  icon={<FaEdit />}
+                  aria-label="Edit image"
+                  variant="outline"
+                  onClick={() => {
+                    document.getElementById('imageInput').click();
+                  }}
                 />
+                <input
+                  id="imageInput"
+                  type="file"
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  onChange={handleImageChange}
+                />
+              </Box>
 
                 <Text as="b" fontSize="3xl">
                   {state.name}
