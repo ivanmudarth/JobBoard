@@ -1,4 +1,4 @@
-### How to test Feature 3: Filter
+### How to test Feature 4: Filter
 
 To test this feature, once the app is launched, sign in to an account (sign up for an account if you dont have one). 
 
