@@ -1,281 +1,305 @@
-import React from 'react';
+import React from "react";
 import { useState } from "react";
 import {
-    VStack,
-    Heading,
-    Text,
-    Flex,
-    Button,
-    Box,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalCloseButton,
-    FormControl,
-    FormLabel,
-    Input,
-    Textarea,
-    FormErrorMessage,
-    ModalFooter
-  } from '@chakra-ui/react';
-import Navbar from './NavBar';
+  VStack,
+  Heading,
+  Text,
+  Flex,
+  Button,
+  Box,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
+  FormErrorMessage,
+  ModalFooter,
+} from "@chakra-ui/react";
+import Navbar from "./NavBar";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 const JobPostingForm = () => {
-    const { id } = useParams();
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const navigate = useNavigate();
+  const { id } = useParams();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
-    const handleSaveClick = () => {
-      setIsModalOpen(true);
-    };
-  
-    const handleCloseModal = () => {
-      setIsModalOpen(false);
-    };
+  const handleSaveClick = () => {
+    setIsModalOpen(true);
+  };
 
-    const goBackToLogin = () => {
-        navigate(`/home/${id}`)
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const goBackToLogin = () => {
+    navigate(`/home/${id}`);
+  };
+
+  const [formData, setFormData] = useState({
+    employerId: undefined,
+    jobTitle: "",
+    jobDescription: "",
+    minSalary: undefined,
+    maxSalary: undefined,
+    avgSalary: undefined,
+    city: "",
+    state: "",
+  });
+
+  const [employerDetails, setEmployerDetails] = useState({
+    employerName: "",
+    employeeCount: "",
+    revenue: "",
+    ownershipType: "",
+    city: "",
+    state: "",
+  });
+
+  const [jobDescriptionError, setJobDescriptionError] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "jobDescription" && value.length > 550) {
+      setJobDescriptionError("Job description cannot exceed 550 characters.");
+    } else {
+      setJobDescriptionError("");
     }
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-    const [formData, setFormData] = useState({
-        employerId: undefined,
-        jobTitle: "",
-        jobDescription: "",
-        minSalary: undefined,
-        maxSalary: undefined,
-        avgSalary: undefined,
-        city: "",
-        state: "",
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEmployerDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
+  };
+
+  const handleModalSubmit = (e) => {
+    e.preventDefault();
+    const eId = getEmployerID();
+    setIsModalOpen(false); // close modal
+  };
+
+  async function getEmployerID() {
+    fetch("/api/createEmployer", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ employerDetails }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setFormData({ employerId: data[0].id });
       });
+  }
 
-      const [employerDetails, setEmployerDetails] = useState({
-        employerName: '',
-        employeeCount: '',
-        revenue: '',
-        ownershipType: '',
-        city: '',
-        state: '',
-      });
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    addJob();
+    navigate(`/filter/${id}`);
+  };
 
-
-      const [jobDescriptionError, setJobDescriptionError] = useState("");
-    
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        if (name === "jobDescription" && value.length > 550) {
-          setJobDescriptionError("Job description cannot exceed 550 characters.");
-        } else {
-          setJobDescriptionError("");
-        }
-        setFormData((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
-      };
-
-      const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setEmployerDetails((prevDetails) => ({
-          ...prevDetails,
-          [name]: value,
-        }));
-      };
-    
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(formData); // replace with your own logic for submitting the data
-      };
-
-      const getEmployerID = () => {
-        // get new ID here 
-        setFormData({employerId: 5}) // change this to new ID 
-        setIsModalOpen(false); // close modal 
-      }
-
-      const addJob = () => {
-        // add job and then navigate 
-        navigate(`/filter/${id}`)
-      }
+  const addJob = () => {
+    fetch("/api/createJobPosting", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ formData }),
+    });
+  };
 
   return (
     <Box>
       <Navbar user_id={id} />
-    <Box w="70%" maxW="70%" margin="0 auto">
-      <VStack p={4} alignItems="flex-start">
-        <Flex justifyContent="space-between" alignItems="flex-start" w="100%">
-          <Heading size="lg" mb={2}>
-            Post a job
-          </Heading>
-          <Button colorScheme="green" variant="outline"  onClick={handleSaveClick}>
-            New Employer? Get Employee ID
-          </Button>
-        </Flex>
-        <Text mb={4}>Fill out the form below to post a job</Text>
-      </VStack>
+      <Box w="70%" maxW="70%" margin="0 auto">
+        <VStack p={4} alignItems="flex-start">
+          <Flex justifyContent="space-between" alignItems="flex-start" w="100%">
+            <Heading size="lg" mb={2}>
+              Post a job
+            </Heading>
+            <Button
+              colorScheme="green"
+              variant="outline"
+              onClick={handleSaveClick}
+            >
+              New Employer? Get Employee ID
+            </Button>
+          </Flex>
+          <Text mb={4}>Fill out the form below to post a job</Text>
+        </VStack>
 
-      <Box p={4}>
-      <form>
-        <FormControl mb={3}>
-          <FormLabel>Employer ID</FormLabel>
-          <Input
-            type="text"
-            name="employerId"
-            value={formData.employerId}
-            onChange={handleChange}
-          />
-        </FormControl>
-        <FormControl mb={3}>
-          <FormLabel>Job Title</FormLabel>
-          <Input
-            type="text"
-            name="jobTitle"
-            value={formData.jobTitle}
-            onChange={handleChange}
-          />
-        </FormControl>
-        <FormControl mb={3} isInvalid={!!jobDescriptionError}>
-          <FormLabel>Job Description</FormLabel>
-          <Textarea
-            name="jobDescription"
-            value={formData.jobDescription}
-            onChange={handleChange}
-            maxLength={550}
-          />
-          <FormErrorMessage>{jobDescriptionError}</FormErrorMessage>
-        </FormControl>
-        <FormControl mb={3}>
-          <FormLabel>Min Salary</FormLabel>
-          <Input
-            type="number"
-            name="minSalary"
-            value={formData.minSalary}
-            onChange={handleChange}
-          />
-        </FormControl>
-        <FormControl mb={3}>
-          <FormLabel>Max Salary</FormLabel>
-          <Input
-            type="number"
-            name="maxSalary"
-            value={formData.maxSalary}
-            onChange={handleChange}
-          />
-        </FormControl>
-        <FormControl mb={3}>
-          <FormLabel>Avg Salary</FormLabel>
-          <Input
-            type="number"
-            name="avgSalary"
-            value={formData.avgSalary}
-            onChange={handleChange}
-          />
-        </FormControl>
-        <FormControl mb={3}>
-          <FormLabel>City</FormLabel>
-          <Input
-            type="text"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-          />
-        </FormControl>
-        <FormControl mb={3}>
-          <FormLabel>State</FormLabel>
-          <Input
-            type="text"
-            name="state"
-            value={formData.state}
-            onChange={handleChange}
-          />
-        </FormControl>
-        <Button colorScheme="blue" mr={3} onClick={addJob}> 
-              Submit 
-        </Button>
-            <Button variant="ghost" onClick={goBackToLogin}>
-              Cancel
-        </Button>
-      </form>
-    </Box>
-
-    <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Get employer ID</ModalHeader>
-          <ModalBody>
-            <form>
-              <FormControl mb={3}>
-                <FormLabel>Employer name</FormLabel>
+        <Box p={4}>
+          <form>
+            <FormControl mb={3}>
+              <FormLabel>Employer ID</FormLabel>
+              <Input
+                type="text"
+                name="employerId"
+                value={formData.employerId}
+                onChange={handleChange}
+              />
+            </FormControl>
+            <FormControl mb={3}>
+              <FormLabel>Job Title</FormLabel>
+              <Input
+                type="text"
+                name="jobTitle"
+                value={formData.jobTitle}
+                onChange={handleChange}
+              />
+            </FormControl>
+            <FormControl mb={3} isInvalid={!!jobDescriptionError}>
+              <FormLabel>Job Description</FormLabel>
+              <Textarea
+                name="jobDescription"
+                value={formData.jobDescription}
+                onChange={handleChange}
+                maxLength={550}
+              />
+              <FormErrorMessage>{jobDescriptionError}</FormErrorMessage>
+            </FormControl>
+            <FormLabel>Salary</FormLabel>
+            <Flex mb={4}>
+              <FormControl>
                 <Input
-                  type="text"
-                  name="employerName"
-                  value={employerDetails.employerName}
-                  onChange={handleInputChange}
+                  type="number"
+                  name="minSalary"
+                  value={formData.minSalary}
+                  onChange={handleChange}
+                  placeholder="Min Salary"
                 />
               </FormControl>
-              <FormControl mb={3}>
-                <FormLabel>Employee count</FormLabel>
+              <FormControl mr={3} ml={3}>
                 <Input
-                  type="text"
-                  name="employeeCount"
-                  value={employerDetails.employeeCount}
-                  onChange={handleInputChange}
+                  type="number"
+                  name="maxSalary"
+                  value={formData.maxSalary}
+                  onChange={handleChange}
+                  placeholder="Max Salary"
                 />
               </FormControl>
-              <FormControl mb={3}>
-                <FormLabel>Revenue</FormLabel>
+              <FormControl>
                 <Input
-                  type="text"
-                  name="revenue"
-                  value={employerDetails.revenue}
-                  onChange={handleInputChange}
+                  type="number"
+                  name="avgSalary"
+                  value={formData.avgSalary}
+                  onChange={handleChange}
+                  placeholder="Avg Salary"
                 />
               </FormControl>
-              <FormControl mb={3}>
-                <FormLabel>Ownership type</FormLabel>
-                <Input
-                  type="text"
-                  name="ownershipType"
-                  value={employerDetails.ownershipType}
-                  onChange={handleInputChange}
-                />
-              </FormControl>
-              <FormControl mb={3}>
-                <FormLabel>City</FormLabel>
+            </Flex>
+            <FormLabel>Location</FormLabel>
+            <Flex mb={10}>
+              <FormControl mr={1.5}>
                 <Input
                   type="text"
                   name="city"
-                  value={employerDetails.city}
-                  onChange={handleInputChange}
+                  value={formData.city}
+                  onChange={handleChange}
+                  placeholder="City"
                 />
               </FormControl>
-              <FormControl mb={3}>
-                <FormLabel>State</FormLabel>
+              <FormControl ml={1.5}>
                 <Input
                   type="text"
                   name="state"
-                  value={employerDetails.state}
-                  onChange={handleInputChange}
+                  value={formData.state}
+                  onChange={handleChange}
+                  placeholder="State"
                 />
               </FormControl>
-            </form>
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={getEmployerID}>
+            </Flex>
+            <Button colorScheme="blue" mr={3} onClick={handleFormSubmit}>
               Submit
             </Button>
-            <Button variant="ghost" onClick={handleCloseModal}>
+            <Button variant="ghost" onClick={goBackToLogin}>
               Cancel
             </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+          </form>
+        </Box>
 
-    </Box>
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Get employer ID</ModalHeader>
+            <ModalBody>
+              <form>
+                <FormControl mb={3}>
+                  <FormLabel>Employer name</FormLabel>
+                  <Input
+                    type="text"
+                    name="employerName"
+                    value={employerDetails.employerName}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
+                <FormControl mb={3}>
+                  <FormLabel>Employee count</FormLabel>
+                  <Input
+                    type="text"
+                    name="employeeCount"
+                    value={employerDetails.employeeCount}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
+                <FormControl mb={3}>
+                  <FormLabel>Revenue</FormLabel>
+                  <Input
+                    type="text"
+                    name="revenue"
+                    value={employerDetails.revenue}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
+                <FormControl mb={3}>
+                  <FormLabel>Ownership type</FormLabel>
+                  <Input
+                    type="text"
+                    name="ownershipType"
+                    value={employerDetails.ownershipType}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
+                <FormControl mb={3}>
+                  <FormLabel>City</FormLabel>
+                  <Input
+                    type="text"
+                    name="city"
+                    value={employerDetails.city}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
+                <FormControl mb={3}>
+                  <FormLabel>State</FormLabel>
+                  <Input
+                    type="text"
+                    name="state"
+                    value={employerDetails.state}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
+              </form>
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="blue" mr={3} onClick={handleModalSubmit}>
+                Submit
+              </Button>
+              <Button variant="ghost" onClick={handleCloseModal}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </Box>
     </Box>
   );
 };

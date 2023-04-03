@@ -152,7 +152,7 @@ app.post("/api/postReply/:user_id/:job_id", (req, res) => {
 app.post("/api/postReview/:user_id/:job_id/:review", (req, res) => {
   const user_id = req.params.user_id;
   const job_id = req.params.job_id;
-  const review = req.params.review
+  const review = req.params.review;
   const text = req.body;
   const timestamp = 0;
 
@@ -270,6 +270,61 @@ app.get("/api/isShortlisted/:user_id/:job_id", (req, res) => {
         console.log(err);
       }
       res.send(result);
+    }
+  );
+});
+
+// createEmployer
+app.post("/api/createEmployer", (req, res) => {
+  const { employerDetails } = req.body;
+
+  db.query(
+    `INSERT INTO Employer (name, employee_count, revenue, ownership_type, city, state) \
+    VALUES ('${employerDetails.employerName}', \
+      ${employerDetails.employeeCount}, \
+      ${employerDetails.revenue}, \
+      '${employerDetails.ownershipType}', \
+      '${employerDetails.city}', \
+      '${employerDetails.state}')`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+    }
+  );
+
+  db.query(
+    `SELECT * \
+    FROM Employer  \
+    WHERE id = LAST_INSERT_ID()`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+});
+
+// createEmployer
+app.post("/api/createJobPosting", (req, res) => {
+  const { formData } = req.body;
+
+  db.query(
+    `INSERT INTO JobPosting (title, employer_id, description, min_salary, \
+      max_salary, avg_salary, city, state) \
+    VALUES ('${formData.jobTitle}', \
+      ${formData.employerId}, \
+      '${formData.jobDescription}', \
+      ${formData.minSalary}, \
+      ${formData.maxSalary}, \
+      ${formData.avgSalary}, \
+      '${formData.city}', \
+      '${formData.state}')`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
     }
   );
 });
