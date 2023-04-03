@@ -11,6 +11,10 @@ import {
   Input,
   Stack,
   Text,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription
 } from '@chakra-ui/react'
 import { Logo } from './Logo'
 import { PasswordField } from './PasswordField'
@@ -33,6 +37,7 @@ export default function SignInCard(props) {
 
   const [username, setUsername] = useState(" ");
   const [password, setPassword] = useState(" ");
+  const [showError, changeError] = useState(false)
   const navigate = useNavigate();
   
   const handleSubmit = (e) => {
@@ -40,15 +45,19 @@ export default function SignInCard(props) {
   };
 
   function handleSignIn() {
-    fetch(
-      "/api/signIn/" + username + "/" + password
-    ).then((response) => response.json())
+    fetch("/api/signIn/" + username + "/" + password)
+      .then((response) => response.json())
       .then((res) => {
-        // Naviagate to Filter with res as ID 
-        const id = res[0].ID
-        navigate(`/filter/${id}`)
+        // Navigate to Filter with res as ID 
+        const id = res[0].ID;
+        navigate(`/filter/${id}`);
+      })
+      .catch((error) => {
+        console.log("An error occurred:", error);
+        changeError(true)
       });
   }
+  
 
   
   return (
@@ -112,6 +121,14 @@ export default function SignInCard(props) {
                 Forgot password?
               </Button>
             </HStack>
+
+            {showError &&
+            <Alert status='error'>
+              <AlertIcon />
+              <AlertDescription>Your username or password is incorrect</AlertDescription>
+            </Alert>
+            }
+
             <Stack spacing="6">
               <Button colorScheme='teal' variant='solid' onClick={handleSubmit}>Sign in</Button>
             </Stack>
