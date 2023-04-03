@@ -40,7 +40,7 @@ function extractAndInsert(db, source) {
 
     db.query(
       insertStatement,
-      [title, desc, minSal, maxSal, avgSal, city, state, rating],
+      [title, desc, minSal, maxSal, avgSal, city_job, state_job, rating],
       (err, results, fields) => {
         if (err) {
           console.log("Unable to insert item at row ", i + 1);
