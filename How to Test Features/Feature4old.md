@@ -1,4 +1,4 @@
-### How to test Feature 4: Replies
+### How to test Feature 3: Replies
 
 To test this feature, once the app is launched, sign in to an account (sign up for an account if you dont have one). 
 
