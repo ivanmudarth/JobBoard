@@ -1,8 +1,8 @@
 ### How to test Feature 4: Filter
 
-To test this feature, once the app is launched, sign in to an account (sign up for an account if you dont have one). 
+To test this feature, once the app is launched, sign in to an account (sign up for an account if you dont have one).
 
-From there you will be taken the job filter page and see all the jobs in the database. 
+From there you will be taken the Home page. Navigate to the job filter page by clicking on Filter in the Nav bar on the top and see all the jobs in the databse
 
 ![Screen Shot 2023-03-27 at 9 42 26 PM](https://user-images.githubusercontent.com/33183884/228105177-ca1e308e-ba6e-4a05-a300-1330a43738cd.png)
 
