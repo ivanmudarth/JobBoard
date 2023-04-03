@@ -19,6 +19,12 @@ function Navbar(props) {
         <Box>
           <Link href={`/postjob/${props.user_id}`}>Post Job</Link>
         </Box>
+        <Spacer />
+        <Spacer />
+        <Spacer />
+        <Box>
+          <Link href={`/`}>Log Out</Link>
+        </Box>
       </HStack>
     </Flex>
   );
