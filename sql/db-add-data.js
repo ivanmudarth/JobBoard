@@ -36,15 +36,6 @@ function extractAndInsert(db, source) {
       }
     });
 
-    var insertStatement = `INSERT INTO Industry (employer_id, industry_name) VALUES (LAST_INSERT_ID(), '${industry}')`;
-
-    db.query(insertStatement, (err, results, fields) => {
-      if (err) {
-        console.log("Unable to insert item at row ", i + 1);
-        return console.log(err);
-      }
-    });
-
     var insertStatement = `INSERT INTO JobPosting (title, employer_id, description, min_salary, max_salary, avg_salary, city, state, rating) VALUES (?,LAST_INSERT_ID(),?,?,?,?,?,?,?)`;
 
     db.query(
