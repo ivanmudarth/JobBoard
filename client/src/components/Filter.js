@@ -47,6 +47,7 @@ function Filter() {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     getJobs();
   };
 
@@ -79,7 +80,15 @@ function Filter() {
     )
       .then((response) => response.json())
       .then((res) => {
-        setState({ jobs: res });
+        setState({
+          jobs: res,
+          keyword: "",
+          city: "",
+          state: "",
+          salary_min: "",
+          salary_max: "",
+          rating_min: "",
+        });
       });
   }
 
