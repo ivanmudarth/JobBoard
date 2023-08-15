@@ -1,9 +1,25 @@
 # Job Board App 
-### CS 348
+### About
 
-The project currently has Feature 1, 3 and 4 implemented. To test each feature, look for "How to Test" section for all 3 features. 
+A quick and easy job board for professionals in the data science field to look for opportunities that suit their skills, experience, and interests. The application features user authentication, job shortlisting, job posting replies, filtering, user profiles, and employer reviews. 
 
+The web interface was written using React.js and the component library ChakraUI. The backend is a MySQL database which interacts with the frontend using an Express/Node API. This API makes all the SQL queries required for all features and the CRUD functionality behind them. 
+
+See the "How to Test Features" folder for more detail about each feature. 
+
+### Preview 
+
+Login page: 
+<img width="737" alt="image" src="https://user-images.githubusercontent.com/30390967/228073045-b5aa4f83-a3ed-41bb-b541-601f8b292448.png">
+
+Job filter page: 
 ![IMG_2854](https://user-images.githubusercontent.com/30390967/223331565-c62671f3-4e24-4153-befd-5a6c2cdeda99.jpg)
+
+Job posting page:
+<img width="1470" alt="image" src="https://user-images.githubusercontent.com/30390967/229640064-86d01487-dd23-4993-85fa-dbd6290d9f9d.png">
+
+User profile page:
+<img width="1470" alt="image" src="https://user-images.githubusercontent.com/30390967/229636103-15e8a1b3-e51d-4cef-b718-c7ebae763eb8.png">
 
 <details>
 <summary>How to run the project</summary>
