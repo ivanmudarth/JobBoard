@@ -10,6 +10,7 @@ See the "How to Test Features" folder for more detail about each feature.
 ### Preview 
 
 Login page: 
+
 <img width="737" alt="image" src="https://user-images.githubusercontent.com/30390967/228073045-b5aa4f83-a3ed-41bb-b541-601f8b292448.png">
 
 Job filter page: 
